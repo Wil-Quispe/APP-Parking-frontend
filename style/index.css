@@ -1,0 +1,12 @@
+.text-vertical {
+  writing-mode: vertical-lr;
+}
+
+.border-bottom {
+  border: 1px solid rgba(255, 255, 255, 0.548);
+  border-bottom: 1px dashed rgb(69, 255, 69);
+}
+.border-top {
+  border: 1px solid rgba(255, 255, 255, 0.548);
+  border-top: 1px dashed rgb(69, 255, 69);
+}

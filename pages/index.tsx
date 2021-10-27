@@ -1,82 +1,150 @@
-import Head from 'next/head'
+import Navbar from '../components/Navbar'
+import Image from 'next/image'
+import { FormEvent, useState } from 'react'
 
-export default function Home() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const App = () => {
+  const [showModal, setShowModal] = useState(false)
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+  const handleClick = () => {
+    setShowModal(!showModal)
+  }
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
+  const Booking = () => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      const name = (e.currentTarget.elements.namedItem(
+        'name',
+      ) as HTMLInputElement).value
+      const carId = (e.currentTarget.elements.namedItem(
+        'carId',
+      ) as HTMLInputElement).value
+      const pin = (e.currentTarget.elements.namedItem(
+        'pin',
+      ) as HTMLInputElement).value
 
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
+      if (name === '' || carId === '' || pin === '')
+        return alert('Fill the field please')
+      console.log(name, carId, pin)
+    }
+    return (
+      <div className="z-10 rounded-lg absolute w-1/3 h-1/5 flex flex-col justify-center items-center opacity-100 bg-gray-900">
+        <form className="flex flex-col" onSubmit={handleSubmit}>
+          <input
+            name="name"
+            className="mb-2 bg-gray-700 rounded-lg pl-2"
+            placeholder="Name"
+          />
+          <input
+            name="carId"
+            className="mb-2 bg-gray-700 rounded-lg pl-2"
+            placeholder="Car ID"
+          />
+          <input
+            name="pin"
+            className="mb-2 bg-gray-700 rounded-lg pl-2"
+            placeholder="PIN"
+          />
+          <div className="flex justify-center">
+            <button
+              onClick={handleClick}
+              className="bg-blue-400 px-3 mr-2 rounded-sm hover:bg-blue-700"
+            >
+              close
+            </button>
+            <input
+              type="submit"
+              value="Book"
+              // onClick={handleClick}
+              className="bg-blue-400 px-3 mr-2 rounded-sm hover:bg-blue-700"
+            />
+          </div>
+        </form>
+      </div>
+    )
+  }
 
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+  const Item = ({ css = 'border-bottom' }: { css?: string }) => {
+    const [show, setShow] = useState(false)
+    const mouseAction = () => {
+      setShow(!show)
+    }
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    return (
+      <>
+        <div
+          onMouseEnter={mouseAction}
+          onMouseLeave={mouseAction}
+          className={`${css} relative flex justify-center items-center`}
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+          {show ? (
+            <button
+              onClick={handleClick}
+              className="bg-blue-400 px-3 rounded-sm hover:bg-blue-700"
+            >
+              Book
+            </button>
+          ) : (
+            <span>free</span>
+          )}
+        </div>
+      </>
+    )
+  }
+  return (
+    <div>
+      <Navbar />
+      <div className="text-center mt-5">
+        <Image
+          className="rounded-lg"
+          width="350"
+          height="200"
+          src={'/mapa.jpg'}
+        />
+      </div>
+      {showModal && <Booking />}
+      <div className="w-9/12 m-auto">
+        <div className="grid gap-x-1 grid-cols-10 grid-rows-5">
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <span className="col-span-10 flex justify-center items-center bg-gray-600">
+            {'<----------------'}
+          </span>
+          <span className="row-span-2 text-vertical flex justify-center items-center bg-gray-600">
+            {'---------------->'}
+          </span>
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item css="border-top" />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <span className="col-span-10 flex justify-center items-center bg-gray-600">
+            {'---------------->'}
+          </span>
+        </div>
+      </div>
     </div>
   )
 }
+
+export default App
