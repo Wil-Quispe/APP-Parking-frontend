@@ -1,97 +1,13 @@
 import Navbar from '../components/Navbar'
 import Image from 'next/image'
-import { FormEvent, useState } from 'react'
+import Item from '../components/Item'
+import React from 'react'
+import Modal from '../components/Modal'
 
 const App = () => {
-  const [showModal, setShowModal] = useState(false)
-
-  const handleClick = () => {
-    setShowModal(!showModal)
-  }
-
-  const Booking = () => {
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      const name = (e.currentTarget.elements.namedItem(
-        'name',
-      ) as HTMLInputElement).value
-      const carId = (e.currentTarget.elements.namedItem(
-        'carId',
-      ) as HTMLInputElement).value
-      const pin = (e.currentTarget.elements.namedItem(
-        'pin',
-      ) as HTMLInputElement).value
-
-      if (name === '' || carId === '' || pin === '')
-        return alert('Fill the field please')
-      console.log(name, carId, pin)
-    }
-    return (
-      <div className="z-10 rounded-lg absolute w-1/3 h-1/5 flex flex-col justify-center items-center opacity-100 bg-gray-900">
-        <form className="flex flex-col" onSubmit={handleSubmit}>
-          <input
-            name="name"
-            className="mb-2 bg-gray-700 rounded-lg pl-2"
-            placeholder="Name"
-          />
-          <input
-            name="carId"
-            className="mb-2 bg-gray-700 rounded-lg pl-2"
-            placeholder="Car ID"
-          />
-          <input
-            name="pin"
-            className="mb-2 bg-gray-700 rounded-lg pl-2"
-            placeholder="PIN"
-          />
-          <div className="flex justify-center">
-            <button
-              onClick={handleClick}
-              className="bg-blue-400 px-3 mr-2 rounded-sm hover:bg-blue-700"
-            >
-              close
-            </button>
-            <input
-              type="submit"
-              value="Book"
-              // onClick={handleClick}
-              className="bg-blue-400 px-3 mr-2 rounded-sm hover:bg-blue-700"
-            />
-          </div>
-        </form>
-      </div>
-    )
-  }
-
-  const Item = ({ css = 'border-bottom' }: { css?: string }) => {
-    const [show, setShow] = useState(false)
-    const mouseAction = () => {
-      setShow(!show)
-    }
-
-    return (
-      <>
-        <div
-          onMouseEnter={mouseAction}
-          onMouseLeave={mouseAction}
-          className={`${css} relative flex justify-center items-center`}
-        >
-          {show ? (
-            <button
-              onClick={handleClick}
-              className="bg-blue-400 px-3 rounded-sm hover:bg-blue-700"
-            >
-              Book
-            </button>
-          ) : (
-            <span>free</span>
-          )}
-        </div>
-      </>
-    )
-  }
   return (
     <div>
+      <Modal />
       <Navbar />
       <div className="text-center mt-5">
         <Image
@@ -101,43 +17,42 @@ const App = () => {
           src={'/mapa.jpg'}
         />
       </div>
-      {showModal && <Booking />}
-      <div className="w-9/12 m-auto">
+      <div className="w-11/12 m-auto">
         <div className="grid gap-x-1 grid-cols-10 grid-rows-5">
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
+          <Item parkId="0" />
+          <Item parkId="1" />
+          <Item parkId="2" />
+          <Item parkId="3" />
+          <Item parkId="4" />
+          <Item parkId="5" />
+          <Item parkId="6" />
+          <Item parkId="7" />
+          <Item parkId="8" />
+          <Item parkId="9" />
           <span className="col-span-10 flex justify-center items-center bg-gray-600">
             {'<----------------'}
           </span>
           <span className="row-span-2 text-vertical flex justify-center items-center bg-gray-600">
             {'---------------->'}
           </span>
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item css="border-top" />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
-          <Item />
+          <Item parkId="10" css="border-top" />
+          <Item parkId="11" css="border-top" />
+          <Item parkId="12" css="border-top" />
+          <Item parkId="13" css="border-top" />
+          <Item parkId="14" css="border-top" />
+          <Item parkId="15" css="border-top" />
+          <Item parkId="16" css="border-top" />
+          <Item parkId="17" css="border-top" />
+          <Item parkId="18" css="border-top" />
+          <Item parkId="19" />
+          <Item parkId="20" />
+          <Item parkId="21" />
+          <Item parkId="22" />
+          <Item parkId="23" />
+          <Item parkId="24" />
+          <Item parkId="25" />
+          <Item parkId="26" />
+          <Item parkId="27" />
           <span className="col-span-10 flex justify-center items-center bg-gray-600">
             {'---------------->'}
           </span>

@@ -7,6 +7,7 @@ class MyDoc extends Document {
         <Head></Head>
         <body>
           <Main></Main>
+          <div id="Modal"></div>
           <NextScript />
         </body>
       </Html>

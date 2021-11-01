@@ -10,3 +10,8 @@
   border: 1px solid rgba(255, 255, 255, 0.548);
   border-top: 1px dashed rgb(69, 255, 69);
 }
+
+.modal {
+  background-color: rgba(0, 0, 0, 0.815);
+  top: 0;
+}
