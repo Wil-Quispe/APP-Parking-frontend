@@ -13,7 +13,7 @@ const Item = ({ css = 'border-bottom', parkId }: ItemsType) => {
   })
   const { data, error } = useSubscription(BOOKING, { variables: { parkId } })
 
-  if (error || qError) return alert('Something went wrong')
+  if (error || qError) return <>{alert('Something went wrong')}</>
 
   if (data?.booking.mutation === 'booked' || qData?.item.booking === true) {
     return <Busy css={css} parkId={parkId} />

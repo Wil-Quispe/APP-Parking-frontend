@@ -13,12 +13,12 @@ import ModalProvider from '../context/modal/modalContext'
 import './../style/index.css'
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:5000',
+  uri: `${process.env.NEXT_PUBLIC_URI}`,
 })
 
 const wsLink: any = process.browser
   ? new WebSocketLink({
-      uri: 'ws://localhost:5000',
+      uri: `${process.env.NEXT_PUBLIC_WS_URI}`,
       options: { reconnect: true },
     })
   : null
